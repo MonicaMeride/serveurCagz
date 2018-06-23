@@ -24,17 +24,17 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/data', function(req,res) {
-  let email;
+  let choix;
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
       let dbo = db.db("cagz-land");
-      dbo.collection('user').findOne({}, function(err, result) {
+      dbo.collection('choix').find().toArray(function(err, result) {
         if (err) throw err;
-        console.log(result.email);
-        email = result.email;
+        console.log(result[0].param_1);
+        choix = result[0];
         
         db.close();
-        return res.json(email);
+        return res.json(choix);
       });
     });
 });
