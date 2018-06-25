@@ -77,5 +77,25 @@ router.get('/data', function(req,res) {
     });
 });
   
+router.get('/result', function(req,res){
+  MongoClient.connect(url, function(err, db) {
+    if (err) throw err;
+    var dbo = db.db("cagz-land");
+    var myobj = { 
+      "email" : "",
+      "choix":{
+        "choix_1": req.body.choix_1,  
+        "choix_2": req.body.choix_2,
+        "choix_3": req.body.choix_3,
+        "choix_4": req.body.choix_4
+      }      
+    };
+    dbo.collection("choix").insertOne(myobj, function(err, res) {
+      if (err) throw err;
+      console.log("1 document inserted");
+      db.close();
+    });
+  });
+});
 
 module.exports = router;
