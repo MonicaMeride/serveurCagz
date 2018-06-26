@@ -6,7 +6,7 @@ var router = express.Router();
 let mongo = require('mongodb');
 const MongoClient = require('mongodb').MongoClient;
 const url = "mongodb://localhost:27017/";
-
+console.log('elo');
 let db = (table) => {
   MongoClient.connect(url, function(err, db) {
   if (err) throw err;
@@ -77,7 +77,7 @@ router.get('/data', function(req,res) {
     });
 });
   
-router.get('/result', function(req,res){
+router.post('/result', function(req,res){
   MongoClient.connect(url, function(err, db) {
     if (err) throw err;
     var dbo = db.db("cagz-land");
@@ -90,7 +90,7 @@ router.get('/result', function(req,res){
         "choix_4": req.body.choix_4
       }      
     };
-    dbo.collection("choix").insertOne(myobj, function(err, res) {
+    dbo.collection("user_choix").insertOne(myobj, function(err, res) {
       if (err) throw err;
       console.log("1 document inserted");
       db.close();
