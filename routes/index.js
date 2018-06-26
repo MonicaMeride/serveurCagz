@@ -29,8 +29,8 @@ router.post('/api/form',function(req,res){
           host: 'smtp.gmail.com',
           port: 587,
           auth: {
-            user: 'meride.monica@gmail.com',
-            pass: 'seremes971'
+            user: 'impactiesa@gmail.com',
+            pass: 'b3deviesa'
           }
       });
 
